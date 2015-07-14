@@ -1,0 +1,27 @@
+From 0536f2eda8d52e812bb8d8781c20cfbb88eb9968 Mon Sep 17 00:00:00 2001
+From: Christian Stewart <christian@paral.in>
+Date: Fri, 14 Aug 2015 16:09:54 -0700
+Subject: [PATCH 1/1] Remove windows check in go-autogen
+
+Signed-off-by: Christian Stewart <christian@paral.in>
+---
+ hack/make/.go-autogen | 6 ------
+ 1 file changed, 6 deletions(-)
+
+diff --git a/hack/make/.go-autogen b/hack/make/.go-autogen
+index 52e2f57..0421987 100644
+--- a/hack/make/.go-autogen
++++ b/hack/make/.go-autogen
+@@ -46,9 +46,3 @@ make.sh invokes hack/make/.go-autogen to:
+ 
+ */
+ WREOF
+-if [ "$(go env GOOS)" = 'windows' ]; then
+-	rsrc \
+-		-manifest hack/make/.resources-windows/docker.exe.manifest \
+-		-ico      hack/make/.resources-windows/docker.ico \
+-		-o        autogen/winresources/rsrc.syso > /dev/null
+-fi
+-- 
+2.1.4
+
