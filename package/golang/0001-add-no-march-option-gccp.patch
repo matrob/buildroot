@@ -1,0 +1,21 @@
+Adds an option to not add the problematic -m parameter to GCC.
+
+Signed-off-by: Christian Stewart <christian@paral.in>
+[yann.morin.1998@free.fr: fix offset]
+Signed-off-by: "Yann E. MORIN" <yann.morin.1998@free.fr>
+
+diff -Nau golang.orig/src/cmd/cgo/gcc.go golang/src/cmd/cgo/gcc.go
+--- golang.orig/src/cmd/cgo/gcc.go.orig	2015-07-09 15:53:55.720794139 -0700
++++ golang/src/cmd/cgo/gcc.go	2015-07-09 17:46:43.664496374 -0700
+@@ -739,6 +739,11 @@
+ 
+ // gccMachine returns the gcc -m flag to use, either "-m32", "-m64" or "-marm".
+ func (p *Package) gccMachine() []string {
++
++	if os.Getenv("CGO_NO_EMULATION") == "1" {
++		return nil
++	}
++
+ 	switch goarch {
+ 	case "amd64":
+ 		return []string{"-m64"}
