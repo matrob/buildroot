@@ -1,0 +1,41 @@
+make.bash: fix cross-compile when target is same arch as host
+
+Add options GO_NO_HOST and GO_NO_TARGET to make.bash and copy binaries
+into specific directories depending on the target.
+
+Signed-off-by: Christian Stewart <christian@paral.in>
+[yann.morin.1998@free.fr: fix tab-space indentation issues]
+Signed-off-by: "Yann E. MORIN" <yann.morin.1998@free.fr>
+
+diff -durN golang-1.4.2.orig/src/make.bash golang-1.4.2/src/make.bash
+--- golang-1.4.2.orig/src/make.bash	2015-02-18 05:38:34.000000000 +0100
++++ golang-1.4.2/src/make.bash	2015-07-28 23:00:26.375589973 +0200
+@@ -161,18 +161,24 @@
+ "$GOTOOLDIR"/go_bootstrap clean -i std
+ echo
+ 
+-if [ "$GOHOSTARCH" != "$GOARCH" -o "$GOHOSTOS" != "$GOOS" ]; then
++if [ -z "$GO_NO_HOST" ]; then
+ 	echo "# Building packages and commands for host, $GOHOSTOS/$GOHOSTARCH."
+ 	# CC_FOR_TARGET is recorded as the default compiler for the go tool. When building for the host, however,
+ 	# use the host compiler, CC, from `cmd/dist/dist env` instead.
+ 	CC=$CC GOOS=$GOHOSTOS GOARCH=$GOHOSTARCH \
+ 		"$GOTOOLDIR"/go_bootstrap install -ccflags "$GO_CCFLAGS" -gcflags "$GO_GCFLAGS" -ldflags "$GO_LDFLAGS" -v std
+ 	echo
++	mkdir -p ../bin/host/
++	find ../bin/ -maxdepth 1 -type f -exec mv -i {} ../bin/host/ \;
+ fi
+ 
+-echo "# Building packages and commands for $GOOS/$GOARCH."
+-CC=$CC_FOR_TARGET "$GOTOOLDIR"/go_bootstrap install $GO_FLAGS -ccflags "$GO_CCFLAGS" -gcflags "$GO_GCFLAGS" -ldflags "$GO_LDFLAGS" -v std
+-echo
++if [ -z "$GO_NO_TARGET" ]; then
++	echo "# Building packages and commands for $GOOS/$GOARCH."
++	CC=$CC_FOR_TARGET "$GOTOOLDIR"/go_bootstrap install $GO_FLAGS -ccflags "$GO_CCFLAGS" -gcflags "$GO_GCFLAGS" -ldflags "$GO_LDFLAGS" -v std
++	echo
++	mkdir -p ../bin/${GOOS}_${GOARCH}/
++	find ../bin/ -maxdepth 1 -type f -exec mv -i {} ../bin/${GOOS}_${GOARCH}/ \;
++fi
+ 
+ rm -f "$GOTOOLDIR"/go_bootstrap
+ 

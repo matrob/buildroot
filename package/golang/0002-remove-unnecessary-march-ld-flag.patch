@@ -1,0 +1,29 @@
+Removes defining -m parameter to LD, which is unnecessary in buildroot.
+
+Signed-off-by: Christian Stewart <christian@paral.in>
+
+diff -Nau golang.orig/src/cmd/ld/lib.c golang/src/cmd/ld/lib.c
+--- golang.orig/src/cmd/ld/lib.c.orig	2015-07-09 18:38:44.192359082 -0700
++++ golang/src/cmd/ld/lib.c	2015-07-09 18:39:02.108358294 -0700
+@@ -589,20 +589,7 @@
+ 	if(extld == nil)
+ 		extld = "gcc";
+ 	argv[argc++] = extld;
+-	switch(thechar){
+-	case '8':
+-		argv[argc++] = "-m32";
+-		break;
+-	case '6':
+-		argv[argc++] = "-m64";
+-		break;
+-	case '5':
+-		argv[argc++] = "-marm";
+-		break;
+-	}
+-	if(!debug['s'] && !debug_s) {
+-		argv[argc++] = "-gdwarf-2"; 
+-	} else {
++	if(debug['s'] || debug_s) {
+ 		argv[argc++] = "-s";
+ 	}
+ 	if(HEADTYPE == Hdarwin)
