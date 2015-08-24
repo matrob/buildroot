@@ -1627,6 +1627,7 @@ if BR2_PACKAGE_CREW
 menu "extra crew plugins"
 	source "package/crew-hostname/Config.in"
 	source "package/crew-link/Config.in"
+	source "package/crew-volume/Config.in"
 endmenu
 endif
 if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
