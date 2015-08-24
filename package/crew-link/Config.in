@@ -1,0 +1,6 @@
+config BR2_PACKAGE_CREW_LINK
+	bool "link"
+	help
+	  Handles docker links within crew.
+
+	  https://github.com/rlaneve/dokku-link
