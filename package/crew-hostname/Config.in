@@ -1,0 +1,6 @@
+config BR2_PACKAGE_CREW_HOSTNAME
+	bool "hostname"
+	help
+	  Docker containers created with Crew will have correct hostnames.
+
+	  https://github.com/michaelshobbs/dokku-hostname
