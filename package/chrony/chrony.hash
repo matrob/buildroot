@@ -1,3 +1,7 @@
 # From http://listengine.tuxfamily.org/chrony.tuxfamily.org/chrony-announce/2015/10/msg00002.html
 md5  17bc77d3d2ce942675f9600b60452717         chrony-2.2.tar.gz
 sha1 eed81b53ef504430128a3a6fa5b56f7ee2fdf2b1 chrony-2.2.tar.gz
+md5 6e1a8ee2ce6632bedc2f8b5cdccfa69f          chrony-1.29.tar.gz
+sha1 442fb7d62a6f23bf1057864a3dbdfa55e1b6eb35 chrony-1.29.tar.gz
+md5 04ab702fc81150db06809562a9aaed92          chrony-1.31.tar.gz
+sha1 8e92871e164dad89b315a5dda99d94ff7b31770a chrony-1.31.1.tar.gz
