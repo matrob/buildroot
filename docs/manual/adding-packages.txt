@@ -31,6 +31,8 @@ include::adding-packages-rebar.txt[]
 
 include::adding-packages-waf.txt[]
 
+include::adding-packages-golang.txt[]
+
 include::adding-packages-kernel-module.txt[]
 
 include::adding-packages-asciidoc.txt[]
