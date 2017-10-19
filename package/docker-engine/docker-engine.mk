@@ -11,7 +11,7 @@ DOCKER_ENGINE_SITE = $(call github,docker,docker-ce,$(DOCKER_ENGINE_VERSION))
 DOCKER_ENGINE_LICENSE = Apache-2.0
 DOCKER_ENGINE_LICENSE_FILES = LICENSE
 
-DOCKER_ENGINE_DEPENDENCIES = host-go host-pkgconf
+DOCKER_ENGINE_DEPENDENCIES = host-pkgconf
 
 DOCKER_ENGINE_GOPATH = "$(@D)/gopath"
 DOCKER_ENGINE_MAKE_ENV = $(HOST_GO_TARGET_ENV) \
@@ -138,4 +138,4 @@ define DOCKER_ENGINE_INSTALL_TARGET_CMDS
 	)
 endef
 
-$(eval $(generic-package))
+$(eval $(golang-package))
