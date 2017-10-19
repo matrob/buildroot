@@ -9,8 +9,6 @@ RUNC_SITE = $(call github,opencontainers,runc,$(RUNC_VERSION))
 RUNC_LICENSE = Apache-2.0
 RUNC_LICENSE_FILES = LICENSE
 
-RUNC_DEPENDENCIES = host-go
-
 RUNC_GOPATH = "$(@D)/Godeps/_workspace"
 RUNC_MAKE_ENV = $(HOST_GO_TARGET_ENV) \
 	CGO_ENABLED=1 \
@@ -48,4 +46,4 @@ define RUNC_INSTALL_TARGET_CMDS
 	$(INSTALL) -D -m 0755 $(@D)/bin/runc $(TARGET_DIR)/usr/bin/runc
 endef
 
-$(eval $(generic-package))
+$(eval $(golang-package))
